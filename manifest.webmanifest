@@ -1,0 +1,11 @@
+{
+  "name": "ISLAI Glassboat",
+  "short_name": "ISLAI",
+  "start_url": "/islai-glassboat/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0a5b7d",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" }
+  ]
+}
