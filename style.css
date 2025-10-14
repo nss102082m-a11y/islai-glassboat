@@ -1,0 +1,10 @@
+:root{--brand:#0a5b7d;--accent:#18c2c0;--ink:#043545;--bg:#f6fbfd}
+*{box-sizing:border-box} body{margin:0;font-family:-apple-system,system-ui,"Noto Sans JP",sans-serif;background:var(--bg);color:var(--ink)}
+header{display:flex;gap:12px;align-items:center;justify-content:center;padding:16px;border-bottom:1px solid #e5f1f3;background:#fff;position:sticky;top:0}
+header .mark{font-weight:800;letter-spacing:.08em;color:var(--brand)} header small{color:#487}
+main{max-width:900px;margin:28px auto;padding:0 16px;text-align:center}
+.hero{padding:28px 16px;border-radius:14px;background:#fff;border:1px solid #e5f1f3}
+.btn{display:inline-block;margin:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:#fff;font-weight:700}
+.langs{margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.lang{padding:8px 12px;border:1px solid #cfe; background:#eef; border-radius:8px}
+footer{padding:24px 16px;color:#567}
