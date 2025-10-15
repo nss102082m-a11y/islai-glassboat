@@ -1,14 +1,31 @@
 <!doctype html>
 <html lang="ja">
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#007b8f">
-<link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="splash.css">
-<title>ISLAI Glassboat</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007b8f">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Lottie用の追加ここ👇 -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <link rel="stylesheet" href="splash-lottie.css">
+  <!-- 👆ここまで -->
+
+  <title>ISLAI Glassboat</title>
+</head>
 
 <body>
+  <div id="splash" aria-hidden="true">
+  <lottie-player
+    id="islaiIntro"
+    src="https://assets.lottiefiles.com/packages/lf20_xtg7z1.json"
+    background="transparent"
+    speed="1"
+    style="width: 80vw; max-width: 520px; height: auto;"
+    autoplay
+  ></lottie-player>
+</div>
   <!-- ▼ スプラッシュ画面 -->
 <div id="splash" aria-hidden="true">
   <div class="splash-stage">
