@@ -46,26 +46,31 @@
   </div>
 </div>
   
-<header>
-  <img src="icon-192.png" alt="ISLAI" style="height:40px;vertical-align:middle;">
-  <span style="font-weight:bold;margin-left:8px;">ISLAI</span>
-  <small style="margin-left:4px;">The Lighthouse of Language</small>
+<!-- ヘッダー -->
+<header class="app-header" role="banner">
+  <div class="logo">ISLAI</div>
+  <small>The Lighthouse of Language</small>
 </header>
 
-<main>
+<!-- メイン（既存の言語ボタンを流用） -->
+<main class="app-main" role="main">
   <section class="hero">
     <h1>グラスボート 多言語ガイド（プロトタイプ）</h1>
     <p id="msg">スマホ最適化・多言語・音声ガイドに対応予定。</p>
     <div class="langs">
-      <button class="lang" data-code="ja">日本語</button>
-      <button class="lang" data-code="en">English</button>
-      <button class="lang" data-code="zh-CN">简体中文</button>
-      <button class="lang" data-code="zh-TW">繁體中文</button>
-      <button class="lang" data-code="ko">한국어</button>
+      <!-- ★ここは今ある button 群をそのまま置くか、コピペしてOK -->
     </div>
     <p><a class="btn" href="#">デモ再生（準備中）</a></p>
   </section>
 </main>
+
+<!-- 下ナビ -->
+<nav class="tabbar" role="navigation" aria-label="Bottom">
+  <a href="index.html" class="active">ホーム</a>
+  <a href="guide.html">ガイド</a>
+  <a href="about.html">About</a>
+  <a href="settings.html">設定</a>
+</nav>
 
 <footer>© ISLAI / BLUE CORAL</footer>
 <script src="app.js"></script>
