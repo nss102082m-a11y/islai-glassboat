@@ -8,3 +8,25 @@ main{max-width:900px;margin:28px auto;padding:0 16px;text-align:center}
 .langs{margin-top:12px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
 .lang{padding:8px 12px;border:1px solid #cfe; background:#eef; border-radius:8px}
 footer{padding:24px 16px;color:#567}
+
+/* === Shell UI (header & bottom nav) === */
+:root { --brand:#0b3f57; --ink:#0b3f57; --muted:#6a7a86; --bg:#eef6f8; }
+body { background:#eef6f8; color:var(--ink); margin:0; }
+.app-header{
+  position:sticky; top:0; display:flex; gap:.6rem; align-items:center;
+  padding:.8rem 1rem; background:#fff; border-bottom:1px solid #d9e6ea; z-index:5;
+}
+.app-header .logo{ font-weight:800; letter-spacing:.04em; }
+.app-header small{ color:var(--muted); }
+
+.app-main{ padding:1rem; padding-bottom:5.5rem; } /* ナビ分の余白 */
+
+.tabbar{
+  position:fixed; left:0; right:0; bottom:0; display:flex; justify-content:space-around;
+  background:#fff; border-top:1px solid #d9e6ea; padding:.4rem 0; z-index:5;
+}
+.tabbar a{
+  flex:1; text-align:center; padding:.35rem 0; text-decoration:none; color:var(--muted);
+  font-size:.9rem;
+}
+.tabbar a.active{ color:var(--brand); font-weight:700; }
