@@ -5,8 +5,30 @@
 <link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#007b8f">
 <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="splash.css">
 <title>ISLAI Glassboat</title>
 
+<body>
+  <!-- ▼ スプラッシュ画面 -->
+<div id="splash" aria-hidden="true">
+  <div class="splash-stage">
+    <svg id="lighthouse" viewBox="0 0 120 260" role="img" aria-label="Lighthouse">
+      <path d="M60 0h0" fill="none"/> 
+      <path d="M60 20 L80 20 L88 44 L88 220 L32 220 L32 44 L40 20 Z" fill="#0b3f57"/>
+      <path d="M60 120 l-10 18 h20 Z" fill="#fff" opacity=".95"/>
+      <g class="beam">
+        <polygon class="edge" points="88,58 220,120 88,182"/>
+        <polygon class="core" points="88,70 200,120 88,170"/>
+      </g>
+    </svg>
+
+    <!-- ロゴ画像（まだない場合は後で追加OK） -->
+    <img src="ISLAI_logo_main.png" alt="ISLAI — The Lighthouse of Language" class="splash-logo">
+
+    <div class="flash"></div>
+  </div>
+</div>
+  
 <header>
   <img src="icon-192.png" alt="ISLAI" style="height:40px;vertical-align:middle;">
   <span style="font-weight:bold;margin-left:8px;">ISLAI</span>
@@ -35,4 +57,6 @@ if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('service-worker.js');
 }
 </script>
+  <script src="splash.js"></script>
+</body>
 </html>
