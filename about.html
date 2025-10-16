@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007b8f">
   <link rel="stylesheet" href="style.css">
   <title>ISLAI | About</title>
 </head>
@@ -14,15 +16,21 @@
     <small>About</small>
   </header>
 
-  <!-- メイン -->
+  <!-- 本文 -->
   <main class="app-main" role="main">
     <section class="hero">
-      <h1>About</h1>
-      <p>本アプリは <strong>BLUE CORAL</strong> 提供の ISLAI プロトタイプです。</p>
+      <small>About</small>
+      <h1 data-i18n="aboutTitle">About</h1>
+      <p data-i18n="aboutBody">
+        本アプリは <strong>BLUE CORAL</strong> 提供の ISLAI プロトタイプです。
+      </p>
+      <p style="margin-top:12px">
+        <a class="btn" href="https://nss102082m-a11y.github.io/islai-glassboat/" rel="noopener">Web版トップへ</a>
+      </p>
     </section>
   </main>
 
-  <!-- 下ナビ -->
+  <!-- 下ナビ（About を active） -->
   <nav class="tabbar" role="navigation" aria-label="Bottom">
     <a href="index.html">ホーム</a>
     <a href="guide.html">ガイド</a>
@@ -30,5 +38,13 @@
     <a href="settings.html">設定</a>
   </nav>
 
+  <footer>© ISLAI / BLUE CORAL</footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
