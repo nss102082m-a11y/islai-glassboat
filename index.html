@@ -2,87 +2,69 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#007b8f">
   <link rel="stylesheet" href="style.css">
-  <!-- 既存の <head> 内、style.css の下あたりに追記 -->
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-  <!-- Lottie用の追加ここ👇 -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+  <!-- スプラッシュ用（入れていればそのまま動く） -->
   <link rel="stylesheet" href="splash-lottie.css">
-  <!-- 👆ここまで -->
-
+  <!-- Lottie（スプラッシュ用） -->
+  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
   <title>ISLAI Glassboat</title>
 </head>
 
 <body>
+  <!-- ▼ スプラッシュ（使っていなければこのブロックは丸ごと削除してOK） -->
   <div id="splash" aria-hidden="true">
-  <lottie-player
-    id="islaiIntro"
-    src="https://assets.lottiefiles.com/packages/lf20_xtg7z1.json"
-    background="transparent"
-    speed="1"
-    style="width: 80vw; max-width: 520px; height: auto;"
-    autoplay
-  ></lottie-player>
-</div>
-  <!-- ▼ スプラッシュ画面 -->
-<div id="splash" aria-hidden="true">
-  <div class="splash-stage">
-    <svg id="lighthouse" viewBox="0 0 120 260" role="img" aria-label="Lighthouse">
-      <path d="M60 0h0" fill="none"/> 
-      <path d="M60 20 L80 20 L88 44 L88 220 L32 220 L32 44 L40 20 Z" fill="#0b3f57"/>
-      <path d="M60 120 l-10 18 h20 Z" fill="#fff" opacity=".95"/>
-      <g class="beam">
-        <polygon class="edge" points="88,58 220,120 88,182"/>
-        <polygon class="core" points="88,70 200,120 88,170"/>
-      </g>
-    </svg>
-
-    <!-- ロゴ画像（まだない場合は後で追加OK） -->
-    <img src="ISLAI_logo_main.PNG" alt="ISLAI — The Lighthouse of Language" class="splash-logo">
-
-    <div class="flash"></div>
+    <lottie-player
+      id="islaiIntro"
+      src="https://assets.lottiefiles.com/packages/lf20_dyq6c7.json"
+      background="transparent"
+      speed="1"
+      style="width: 80vw; max-width: 520px; margin: 10vh auto 0;"
+      autoplay
+    ></lottie-player>
   </div>
-</div>
-  
-<!-- ヘッダー -->
-<header class="app-header" role="banner">
-  <div class="logo">ISLAI</div>
-  <small>The Lighthouse of Language</small>
-</header>
+  <!-- ▲ スプラッシュ -->
 
-<!-- メイン（既存の言語ボタンを流用） -->
-<main class="app-main" role="main">
-  <section class="hero">
-    <h1>グラスボート 多言語ガイド（プロトタイプ）</h1>
-    <p id="msg">スマホ最適化・多言語・音声ガイドに対応予定。</p>
-    <div class="langs">
-      <!-- ★ここは今ある button 群をそのまま置くか、コピペしてOK -->
-    </div>
-    <p><a class="btn" href="#">デモ再生（準備中）</a></p>
-  </section>
-</main>
+  <!-- ヘッダー -->
+  <header class="app-header" role="banner">
+    <div class="logo">ISLAI</div>
+    <small data-i18n="brandTag">The Lighthouse of Language</small>
+  </header>
 
-<!-- 下ナビ -->
-<nav class="tabbar" role="navigation" aria-label="Bottom">
-  <a href="index.html" class="active">ホーム</a>
-  <a href="guide.html">ガイド</a>
-  <a href="about.html">About</a>
-  <a href="settings.html">設定</a>
-</nav>
+  <!-- メイン（カード1枚） -->
+  <main class="app-main" role="main">
+    <section class="hero">
+      <h1 data-i18n="homeTitle">グラスボート 多言語ガイド（プロトタイプ）</h1>
+      <p id="msg" data-i18n="homeMsg">スマホ最適化・多言語・音声ガイドに対応予定。</p>
+      <p>
+        <a class="btn" href="#" data-i18n="demoBtn">デモ再生（準備中）</a>
+      </p>
+    </section>
+  </main>
 
-<footer>© ISLAI / BLUE CORAL</footer>
-<script src="app.js"></script>
+  <!-- フッター -->
+  <footer>© ISLAI / BLUE CORAL</footer>
+
+  <!-- 下ナビ -->
+  <nav class="tabbar" role="navigation" aria-label="Bottom">
+    <a href="index.html" class="active">ホーム</a>
+    <a href="guide.html">ガイド</a>
+    <a href="about.html">About</a>
+    <a href="settings.html">設定</a>
+  </nav>
+
+  <!-- アプリ本体 -->
+  <script src="app.js"></script>
+  <!-- スプラッシュ制御（使っていないなら削除可） -->
+  <script src="splash-lottie.js"></script>
+
+  <!-- Service Worker 登録 -->
   <script>
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('service-worker.js');
-}
-</script>
-  <script src="splash.js"></script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
