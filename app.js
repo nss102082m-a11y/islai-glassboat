@@ -113,7 +113,6 @@ function applyI18n() {
     const key = el.getAttribute('data-i18n');
     if (dict[key]) el.textContent = dict[key];
   });
-  // ボタンの aria-label も補助的に更新
   document.querySelectorAll('[data-i18n-aria]').forEach(el=>{
     const key = el.getAttribute('data-i18n-aria');
     if (dict[key]) el.setAttribute('aria-label', dict[key]);
@@ -140,7 +139,7 @@ function bindGuideAudio() {
   audioEl = document.getElementById('guideAudio');
   if (!audioEl || !btn) return;
 
-  audioEl.src = src; // 言語に応じたファイル
+  audioEl.src = src;
   btn.textContent = I18N[getLang()].play;
   state.textContent = I18N[getLang()].idle;
 
@@ -157,7 +156,6 @@ function bindGuideAudio() {
     }
   };
 
-  // 言語が変わったらファイル差し替え
   window.addEventListener('storage', (e)=>{
     if (e.key === 'lang') {
       const d = I18N[getLang()];
@@ -169,15 +167,15 @@ function bindGuideAudio() {
     }
   });
 }
+
+// ====== 言語別音声ファイル対応（audio: 形式）======
 function pickAudioByLang(lang) {
-  // 置いたファイル名に合わせて変更可
-  // 例：/audio/demo-ja.mp3, /audio/demo-en.mp3 ...
   const map = {
-    ja: '/audio/demo-ja.mp3',
-    en: '/audio/demo-en.mp3',
-    'zh-CN': '/audio/demo-zh-CN.mp3',
-    'zh-TW': '/audio/demo-zh-TW.mp3',
-    ko: '/audio/demo-ko.mp3'
+    ja: 'audio:ja.mp3',
+    en: 'audio:en.mp3',
+    'zh-CN': 'audio:zh.mp3',
+    'zh-TW': 'audio:zh.mp3',
+    ko: 'audio:ja.mp3'
   };
   return map[lang] || map.ja;
 }
