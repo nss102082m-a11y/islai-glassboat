@@ -11,22 +11,20 @@
   <!-- ヘッダー -->
   <header class="app-header" role="banner">
     <div class="logo">ISLAI</div>
-    <small>Guide</small>
+    <small data-i18n="guideTitle">Guide</small>
   </header>
 
   <!-- メイン -->
   <main class="app-main" role="main">
     <section class="hero">
-      <h1>ガイド</h1>
-      <p>ここにコースや音声ガイドの入口を置く想定。</p>
-    </section>
-    <h1 data-i18n="guideTitle">ガイド</h1>
-<p data-i18n="guideMsg">ここにコースや音声ガイドの入口を置く想定。</p>
+      <h1 data-i18n="guideTitle">ガイド</h1>
+      <p data-i18n="guideMsg">ここにコースや音声ガイドの入口を置く想定。</p>
 
-<!-- 言語別デモ音声 -->
-<audio id="guideAudio" preload="none" controls style="display:none"></audio>
-<button id="playBtn" class="btn" data-i18n-aria="play">再生</button>
-<small id="playState" style="margin-left:8px" data-i18n="idle">停止中</small>
+      <!-- 言語別デモ音声（プレイヤーは隠してボタンで制御） -->
+      <audio id="guideAudio" preload="none" controls style="display:none"></audio>
+      <button id="playBtn" class="btn" data-i18n-aria="play">再生</button>
+      <small id="playState" style="margin-left:8px" data-i18n="idle">停止中</small>
+    </section>
   </main>
 
   <!-- 下ナビ -->
@@ -37,5 +35,7 @@
     <a href="settings.html">設定</a>
   </nav>
 
+  <!-- これがないとボタンが動かない！ -->
+  <script src="app.js"></script>
 </body>
 </html>
