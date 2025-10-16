@@ -33,3 +33,129 @@ body { background:#eef6f8; color:var(--ink); margin:0; }
 
 /* TEMP: スプラッシュ無効化（後で外す） */
 #splash { display: none !important; }
+
+/* ===== ISLAI ベース配色（ターコイズ系） ===== */
+:root{
+  --c-bg: #eef6f8;
+  --c-ink: #0b3f57;   /* ロゴの濃紺に合わせた本文色 */
+  --c-accent: #0aa4b5;/* ターコイズ */
+  --c-accent-2:#ffd669;/* ライトの黄 */
+  --radius: 14px;
+  --shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+html,body{
+  height:100%;
+  background: var(--c-bg);
+  color: var(--c-ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans JP", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* コンテンツ幅＆余白 */
+main, header, footer{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* ===== ヘッダー ===== */
+.app-header{
+  display:flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 16px 6px;
+}
+.app-header .logo{
+  font-weight: 800;
+  letter-spacing: .3px;
+  font-size: 20px;
+}
+.app-header small{
+  font-size: 13px;
+  opacity: .8;
+}
+
+/* ===== ヒーロー（カード風） ===== */
+.hero{
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 22px 18px;
+  margin: 18px 0 28px;
+}
+.hero h1{
+  font-size: 22px;
+  margin: 0 0 8px;
+}
+.hero #msg{
+  margin: 0 0 14px;
+  opacity: .9;
+}
+
+/* ===== 言語ボタン ===== */
+.langs{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+button.lang{
+  border: 1.5px solid rgba(0,0,0,.08);
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: #f7fbfc;
+  color: var(--c-ink);
+  font-weight: 600;
+}
+button.lang:active{
+  transform: translateY(1px);
+}
+button.lang[data-code="ja"]{ border-color: rgba(0,0,0,.12); }
+button.lang:hover{ border-color: var(--c-accent); }
+
+/* メインのアクションボタン */
+a.btn{
+  display:inline-block;
+  text-decoration:none;
+  background: var(--c-accent);
+  color: #fff;
+  font-weight:700;
+  padding: 12px 18px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(10,164,181,.25);
+}
+
+/* ===== 下タブナビ（固定） ===== */
+.tabbar{
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 6px;
+  background: rgba(255,255,255,.7);
+  backdrop-filter: blur(8px);
+  padding: 10px;
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.tabbar a{
+  text-align: center;
+  padding: 10px 6px;
+  border-radius: 10px;
+  color: var(--c-ink);
+  text-decoration: none;
+  font-weight: 600;
+}
+.tabbar a.active{
+  background: #fff;
+  box-shadow: var(--shadow);
+  color: var(--c-accent);
+}
+
+/* ちょい余白 */
+footer{
+  padding: 20px 16px 40px;
+  opacity: .8;
+  font-size: 13px;
+}
