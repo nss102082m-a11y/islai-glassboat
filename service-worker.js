@@ -12,8 +12,8 @@ const ASSETS = [
   './splash-lottie.js',
   './ISLAI_logo_main.PNG',
   './manifest.json',
-  './icon-192.PNG',
-  './icon-512.PNG'
+  './icon-192.png',
+  './icon-512.png'
 ];
 
 self.addEventListener('install', (e) => {
