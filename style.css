@@ -30,3 +30,6 @@ body { background:#eef6f8; color:var(--ink); margin:0; }
   font-size:.9rem;
 }
 .tabbar a.active{ color:var(--brand); font-weight:700; }
+
+/* TEMP: スプラッシュ無効化（後で外す） */
+#splash { display: none !important; }
