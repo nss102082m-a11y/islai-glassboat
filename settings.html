@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007b8f">
   <link rel="stylesheet" href="style.css">
   <title>ISLAI | 設定</title>
 </head>
@@ -14,19 +16,20 @@
     <small>Settings</small>
   </header>
 
-  <!-- メイン -->
+  <!-- 本文 -->
   <main class="app-main" role="main">
     <section class="hero">
-      <h1>設定</h1>
-      <ul>
-        <li>言語: 日本語（仮）</li>
-        <li>音声: 準備中</li>
-        <li>オフライン: PWA準備中</li>
+      <small>Settings</small>
+      <h1 data-i18n="settingsTitle">設定</h1>
+      <ul style="margin-top:12px">
+        <li data-i18n="settingsLang">言語：日本語（仮）</li>
+        <li data-i18n="settingsVoice">音声：準備中</li>
+        <li data-i18n="settingsPWA">オフライン：PWA準備中</li>
       </ul>
     </section>
   </main>
 
-  <!-- 下ナビ -->
+  <!-- 下ナビ（設定 を active） -->
   <nav class="tabbar" role="navigation" aria-label="Bottom">
     <a href="index.html">ホーム</a>
     <a href="guide.html">ガイド</a>
@@ -34,5 +37,13 @@
     <a href="settings.html" class="active">設定</a>
   </nav>
 
+  <footer>© ISLAI / BLUE CORAL</footer>
+
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 </body>
 </html>
