@@ -1,41 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#007b8f">
   <link rel="stylesheet" href="style.css">
   <title>ISLAI | Guide</title>
 </head>
 <body>
-
-  <!-- ヘッダー -->
   <header class="app-header" role="banner">
     <div class="logo">ISLAI</div>
     <small data-i18n="guideTitle">Guide</small>
   </header>
 
-  <!-- メイン -->
   <main class="app-main" role="main">
     <section class="hero">
+      <small data-i18n="guideTitle">Guide</small>
       <h1 data-i18n="guideTitle">ガイド</h1>
       <p data-i18n="guideMsg">ここにコースや音声ガイドの入口を置く想定。</p>
 
-      <!-- 言語別デモ音声（プレイヤーは隠してボタンで制御） -->
-      <audio id="guideAudio" preload="none" controls style="display:none"></audio>
-      <button id="playBtn" class="btn" data-i18n-aria="play">再生</button>
-      <small id="playState" style="margin-left:8px" data-i18n="idle">停止中</small>
+      <p style="margin-top:16px">
+        <button id="playBtn" class="btn" data-i18n="play">再生</button>
+        <span id="playState" style="margin-left:12px" data-i18n="idle">停止中</span>
+      </p>
+      <audio id="guideAudio" preload="none"></audio>
     </section>
   </main>
 
-  <!-- 下ナビ -->
   <nav class="tabbar" role="navigation" aria-label="Bottom">
-    <a href="index.html">ホーム</a>
-    <a href="guide.html" class="active">ガイド</a>
-    <a href="about.html">About</a>
-    <a href="settings.html">設定</a>
+    <a href="index.html" data-i18n="navHome">ホーム</a>
+    <a href="guide.html" class="active" data-i18n="navGuide">ガイド</a>
+    <a href="about.html" data-i18n="navAbout">About</a>
+    <a href="settings.html" data-i18n="navSettings">設定</a>
   </nav>
 
-  <!-- これがないとボタンが動かない！ -->
+  <footer>© ISLAI / BLUE CORAL</footer>
+
   <script src="app.js"></script>
 </body>
 </html>
