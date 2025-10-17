@@ -9,20 +9,16 @@
   <title>ISLAI | 設定</title>
 </head>
 <body>
-
-  <!-- ヘッダー -->
   <header class="app-header" role="banner">
     <div class="logo">ISLAI</div>
-    <small>Settings</small>
+    <small data-i18n="settingsTitle">Settings</small>
   </header>
 
-  <!-- 本文 -->
   <main class="app-main" role="main">
     <section class="hero">
-      <small>Settings</small>
+      <small data-i18n="settingsTitle">Settings</small>
       <h1 data-i18n="settingsTitle">設定</h1>
 
-      <!-- 言語切替 UI -->
       <fieldset style="margin-top:12px; border:0; padding:0">
         <legend style="font-weight:600; margin-bottom:8px" data-i18n="settingsLang">言語</legend>
         <label style="margin-right:12px"><input type="radio" name="lang" value="ja"> 日本語</label>
@@ -39,21 +35,15 @@
     </section>
   </main>
 
-  <!-- 下ナビ -->
   <nav class="tabbar" role="navigation" aria-label="Bottom">
-    <a href="index.html">ホーム</a>
-    <a href="guide.html">ガイド</a>
-    <a href="about.html">About</a>
-    <a href="settings.html" class="active">設定</a>
+    <a href="index.html" data-i18n="navHome">ホーム</a>
+    <a href="guide.html" data-i18n="navGuide">ガイド</a>
+    <a href="about.html" data-i18n="navAbout">About</a>
+    <a href="settings.html" class="active" data-i18n="navSettings">設定</a>
   </nav>
 
   <footer>© ISLAI / BLUE CORAL</footer>
 
   <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
 </body>
 </html>
