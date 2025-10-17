@@ -1,0 +1,21 @@
+{
+  "brandTag": "언어의 등대",
+  "homeTitle": "글라스보트 다국어 가이드(프로토타입)",
+  "homeMsg": "모바일 최적화·다국어·음성 가이드 예정.",
+  "demoBtn": "데모 재생(준비 중)",
+
+  "guideTitle": "가이드",
+  "guideMsg": "코스·음성 가이드 진입점을 여기에 둘 예정입니다.",
+  "play": "재생",
+  "pause": "일시정지",
+  "nowPlaying": "재생 중…",
+  "idle": "대기",
+
+  "aboutTitle": "About",
+  "aboutBody": "본 앱은 BLUE CORAL이 제공하는 ISLAI 프로토타입입니다.",
+
+  "settingsTitle": "설정",
+  "settingsLang": "언어",
+  "settingsAudio": "오디오: 준비 중",
+  "settingsOffline": "오프라인: PWA 준비 중"
+}
