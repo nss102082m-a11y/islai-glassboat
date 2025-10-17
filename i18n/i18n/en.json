@@ -1,0 +1,21 @@
+{
+  "brandTag": "The Lighthouse of Language",
+  "homeTitle": "Glassboat Multilingual Guide (Prototype)",
+  "homeMsg": "Mobile-optimized, multilingual, with audio guide (planned).",
+  "demoBtn": "Play demo (WIP)",
+
+  "guideTitle": "Guide",
+  "guideMsg": "Entrypoints for courses and audio guides will appear here.",
+  "play": "Play",
+  "pause": "Pause",
+  "nowPlaying": "Now playing…",
+  "idle": "Idle",
+
+  "aboutTitle": "About",
+  "aboutBody": "This app is an ISLAI prototype by BLUE CORAL.",
+
+  "settingsTitle": "Settings",
+  "settingsLang": "Language",
+  "settingsAudio": "Audio: WIP",
+  "settingsOffline": "Offline: PWA WIP"
+}
