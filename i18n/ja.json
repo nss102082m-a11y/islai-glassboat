@@ -18,4 +18,8 @@
   "settingsLang": "言語",
   "settingsAudio": "音声：準備中",
   "settingsOffline": "オフライン：PWA準備中"
+  "navHome":"ホーム",
+"navGuide":"ガイド",
+"navAbout":"About",
+"navSettings":"設定"
 }
