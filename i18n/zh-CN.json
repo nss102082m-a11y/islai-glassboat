@@ -18,4 +18,8 @@
   "settingsLang": "语言",
   "settingsAudio": "音频：开发中",
   "settingsOffline": "离线：PWA 开发中"
+  "navHome":"首页",
+"navGuide":"导览",
+"navAbout":"关于",
+"navSettings":"设置"
 }
