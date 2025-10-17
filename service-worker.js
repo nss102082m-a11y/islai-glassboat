@@ -1,5 +1,5 @@
-// service-worker.js
-const VERSION = 'v4';               // ★バージョンを上げる
+// service-worker.js  — 完成版
+const VERSION = 'v5';                         // ★ここだけ上げる
 const CACHE_NAME = `islai-${VERSION}`;
 const ORIGIN = self.location.origin;
 
@@ -17,24 +17,20 @@ const ASSETS = [
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
-  // ★実ファイル名に合わせる（コロン入り）
-  './audio:ja.mp3',
-  './audio:en.mp3',
-  './audio:zh.mp3',
+  './ja.mp3',
+  './en.mp3',
+  './zh.mp3',
 ];
 
 self.addEventListener('install', (evt) => {
-  evt.waitUntil(caches.open(CACHE_NAME).then(c => c.addAll(ASSETS)));
+  evt.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
   self.skipWaiting();
 });
 
 self.addEventListener('activate', (evt) => {
   evt.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys
-        .filter(k => k.startsWith('islai-') && k !== CACHE_NAME)
-        .map(k => caches.delete(k))
-      )
+    caches.keys().then((keys) =>
+      Promise.all(keys.filter((k) => k.startsWith('islai-') && k !== CACHE_NAME).map((k) => caches.delete(k)))
     )
   );
   self.clients.claim();
@@ -46,16 +42,17 @@ self.addEventListener('message', (evt) => {
 
 self.addEventListener('fetch', (evt) => {
   const req = evt.request;
-  if (req.method !== 'GET') return;          // POST等は素通し
-  if (req.headers.has('range')) {            // Rangeはネット優先
+  if (req.method !== 'GET') return;
+
+  if (req.headers.has('range')) {
     evt.respondWith(fetch(req));
     return;
   }
 
   evt.respondWith((async () => {
     const cache = await caches.open(CACHE_NAME);
-    const hit = await cache.match(req, { ignoreSearch: true });
-    if (hit) return hit;
+    const cached = await cache.match(req, { ignoreSearch: true });
+    if (cached) return cached;
 
     try {
       const res = await fetch(req);
