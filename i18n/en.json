@@ -18,4 +18,8 @@
   "settingsLang": "Language",
   "settingsAudio": "Audio: WIP",
   "settingsOffline": "Offline: PWA WIP"
+  "navHome":"Home",
+"navGuide":"Guide",
+"navAbout":"About",
+"navSettings":"Settings"
 }
