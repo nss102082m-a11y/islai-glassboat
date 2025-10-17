@@ -1,0 +1,21 @@
+{
+  "brandTag": "The Lighthouse of Language",
+  "homeTitle": "グラスボート 多言語ガイド（プロトタイプ）",
+  "homeMsg": "スマホ最適化・多言語・音声ガイドに対応予定。",
+  "demoBtn": "デモ再生（準備中）",
+
+  "guideTitle": "ガイド",
+  "guideMsg": "ここにコースや音声ガイドの入口を置く想定。",
+  "play": "再生",
+  "pause": "一時停止",
+  "nowPlaying": "再生中…",
+  "idle": "停止中",
+
+  "aboutTitle": "About",
+  "aboutBody": "本アプリは BLUE CORAL 提供の ISLAI プロトタイプです。",
+
+  "settingsTitle": "設定",
+  "settingsLang": "言語",
+  "settingsAudio": "音声：準備中",
+  "settingsOffline": "オフライン：PWA準備中"
+}
