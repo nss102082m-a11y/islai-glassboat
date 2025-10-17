@@ -1,0 +1,21 @@
+{
+  "brandTag": "语言的灯塔",
+  "homeTitle": "玻璃船 多语言导览（原型）",
+  "homeMsg": "计划支持手机优化、多语言、语音导览。",
+  "demoBtn": "演示（开发中）",
+
+  "guideTitle": "导览",
+  "guideMsg": "课程与语音导览入口将放在这里。",
+  "play": "播放",
+  "pause": "暂停",
+  "nowPlaying": "播放中…",
+  "idle": "空闲",
+
+  "aboutTitle": "关于",
+  "aboutBody": "本应用为 BLUE CORAL 提供的 ISLAI 原型。",
+
+  "settingsTitle": "设置",
+  "settingsLang": "语言",
+  "settingsAudio": "音频：开发中",
+  "settingsOffline": "离线：PWA 开发中"
+}
