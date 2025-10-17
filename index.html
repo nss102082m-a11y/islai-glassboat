@@ -2,69 +2,40 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#007b8f">
   <link rel="stylesheet" href="style.css">
-  <!-- スプラッシュ用（入れていればそのまま動く） -->
-  <link rel="stylesheet" href="splash-lottie.css">
-  <!-- Lottie（スプラッシュ用） -->
-  <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-  <title>ISLAI Glassboat</title>
+  <title>ISLAI | Home</title>
 </head>
-
 <body>
-  <!-- ▼ スプラッシュ（使っていなければこのブロックは丸ごと削除してOK） -->
-  <div id="splash" aria-hidden="true">
-    <lottie-player
-      id="islaiIntro"
-      src="https://assets.lottiefiles.com/packages/lf20_dyq6c7.json"
-      background="transparent"
-      speed="1"
-      style="width: 80vw; max-width: 520px; margin: 10vh auto 0;"
-      autoplay
-    ></lottie-player>
-  </div>
-  <!-- ▲ スプラッシュ -->
-
-  <!-- ヘッダー -->
   <header class="app-header" role="banner">
     <div class="logo">ISLAI</div>
     <small data-i18n="brandTag">The Lighthouse of Language</small>
   </header>
 
-  <!-- メイン（カード1枚） -->
   <main class="app-main" role="main">
     <section class="hero">
       <h1 data-i18n="homeTitle">グラスボート 多言語ガイド（プロトタイプ）</h1>
-      <p id="msg" data-i18n="homeMsg">スマホ最適化・多言語・音声ガイドに対応予定。</p>
-      <p>
-        <a class="btn" href="#" data-i18n="demoBtn">デモ再生（準備中）</a>
+      <p data-i18n="homeMsg">スマホ最適化・多言語・音声ガイドに対応予定。</p>
+      <p style="margin-top:12px">
+        <button class="btn" data-i18n="demoBtn">デモ再生（準備中）</button>
       </p>
     </section>
   </main>
 
-  <!-- フッター -->
-  <footer>© ISLAI / BLUE CORAL</footer>
-
-  <!-- 下ナビ -->
   <nav class="tabbar" role="navigation" aria-label="Bottom">
-    <a href="index.html" class="active">ホーム</a>
-    <a href="guide.html">ガイド</a>
-    <a href="about.html">About</a>
-    <a href="settings.html">設定</a>
+    <a href="index.html" class="active" data-i18n="navHome">ホーム</a>
+    <a href="guide.html" data-i18n="navGuide">ガイド</a>
+    <a href="about.html" data-i18n="navAbout">About</a>
+    <a href="settings.html" data-i18n="navSettings">設定</a>
   </nav>
 
-  <!-- アプリ本体 -->
-  <script src="app.js"></script>
-  <!-- スプラッシュ制御（使っていないなら削除可） -->
-  <script src="splash-lottie.js"></script>
+  <footer>© ISLAI / BLUE CORAL</footer>
 
-  <!-- Service Worker 登録 -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+  <!-- app.js をインライン化（上の <script> をここに貼る） -->
+  <!-- ↓外部ファイルで使うなら <script src="app.js"></script> に差し替え -->
+  <!-- app.js 完成版 -->
+  <!--#APP_JS#-->
 </body>
 </html>
