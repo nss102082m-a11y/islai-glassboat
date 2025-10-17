@@ -1,0 +1,21 @@
+{
+  "brandTag": "語言的燈塔",
+  "homeTitle": "玻璃船 多語導覽（原型）",
+  "homeMsg": "預計支援手機最佳化、多語、語音導覽。",
+  "demoBtn": "示範（開發中）",
+
+  "guideTitle": "導覽",
+  "guideMsg": "這裡會放課程與語音導覽入口。",
+  "play": "播放",
+  "pause": "暫停",
+  "nowPlaying": "播放中…",
+  "idle": "閒置",
+
+  "aboutTitle": "About",
+  "aboutBody": "本應用為 BLUE CORAL 提供之 ISLAI 原型。",
+
+  "settingsTitle": "設定",
+  "settingsLang": "語言",
+  "settingsAudio": "音訊：開發中",
+  "settingsOffline": "離線：PWA 開發中"
+}
