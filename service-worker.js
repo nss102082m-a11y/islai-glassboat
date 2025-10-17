@@ -1,5 +1,5 @@
 // service-worker.js  — 完成版
-const VERSION = 'v6';                         // ★ここだけ上げる
+const VERSION = 'v8';                         // ★ここだけ上げる
 const CACHE_NAME = `islai-${VERSION}`;
 const ORIGIN = self.location.origin;
 
