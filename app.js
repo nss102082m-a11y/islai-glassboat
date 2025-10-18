@@ -1,8 +1,8 @@
-// app.js v15 — instant i18n + BFCache-safe
+// app.js v16 — fixed paths (/i18n, /audio) + BFCache-safe
 
 const DEFAULT_LANG = 'ja';
-const I18N_PATH = '/islai-glassboat/i18n';     // ← GitHub Pages のサブパスに合わせる
-const AUDIO_PATH = '/islai-glassboat/audio';
+const I18N_PATH = '/i18n';          // ← ここをルート直下に修正
+const AUDIO_PATH = '/audio';        // ← ここもルート直下
 
 function getLang() { return localStorage.getItem('lang') || DEFAULT_LANG; }
 function setLang(code) {
@@ -12,9 +12,8 @@ function setLang(code) {
   applyAudio();
 }
 
-// ---- JSON辞書の取得（no-store で常に最新）
 async function loadDict(lang) {
-  const url = `${I18N_PATH}/${lang}.json?v=15`;
+  const url = `${I18N_PATH}/${lang}.json?v=16`;
   const res = await fetch(url, { cache: 'no-store' });
   if (!res.ok) throw new Error('i18n load failed: ' + url);
   return res.json();
@@ -27,16 +26,13 @@ async function getDict() {
   return dictCache[lang];
 }
 
-// ---- i18n適用
 async function applyI18n() {
   try {
     const d = await getDict();
-    // テキスト
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const k = el.getAttribute('data-i18n');
       if (d[k] != null) el.textContent = d[k];
     });
-    // aria-label
     document.querySelectorAll('[data-i18n-aria]').forEach(el => {
       const k = el.getAttribute('data-i18n-aria');
       if (d[k] != null) el.setAttribute('aria-label', d[k]);
@@ -44,7 +40,6 @@ async function applyI18n() {
   } catch (e) { console.warn(e); }
 }
 
-// ---- 設定ラジオ
 function bindSettings() {
   const radios = document.querySelectorAll('input[name="lang"]');
   if (!radios.length) return;
@@ -55,7 +50,6 @@ function bindSettings() {
   });
 }
 
-// ---- ガイド音声
 function audioByLang(lang) {
   const map = { ja: 'ja.mp3', en: 'en.mp3', 'zh-CN': 'zh.mp3', 'zh-TW': 'zh.mp3', ko: 'ko.mp3' };
   return `${AUDIO_PATH}/${map[lang] || 'ja.mp3'}`;
@@ -92,7 +86,6 @@ function applyAudio() {
   };
 }
 
-// ---- 初期化（あらゆる入り口で確実に走らせる）
 function init() {
   document.documentElement.setAttribute('lang', getLang());
   applyI18n();
@@ -100,9 +93,7 @@ function init() {
   applyAudio();
 }
 
-// 1) すでに読み込み済みなら即実行
 if (document.readyState !== 'loading') init();
-// 2) 通常ロード
 document.addEventListener('DOMContentLoaded', init);
-// 3) BFCache 復元
 window.addEventListener('pageshow', init);
+
