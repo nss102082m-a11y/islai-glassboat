@@ -1,66 +1,54 @@
-// app.js — instant i18n, no reload
-
-// ====== 設定 ======
-const VERSION      = '11';          // キャッシュ回避用のバージョン（数字だけ上げればOK）
+// app.js – instant i18n, no reload (relative paths)
 const DEFAULT_LANG = 'ja';
-const I18N_PATH    = '/i18n';
-const AUDIO_PATH   = '/audio';
+const I18N_PATH = 'i18n';    // ← 先頭のスラッシュ無し
+const AUDIO_PATH = 'audio';  // ← 同上
 
-// ====== 言語保存・取得 ======
+// 言語の保存・取得
 function getLang() {
   return localStorage.getItem('lang') || DEFAULT_LANG;
 }
 function setLang(code) {
   localStorage.setItem('lang', code);
   document.documentElement.setAttribute('lang', code);
-  // その場で反映
   applyI18n();
   applyAudio();
 }
 
-// ====== i18n JSON 読み込み（no-store で常に最新） ======
+// JSON辞書を読み込み（SW回避のため no-store）
 async function loadDict(lang) {
-  const url = `${I18N_PATH}/${lang}.json?v=${VERSION}`;
+  const url = `${I18N_PATH}/${lang}.json?v=8`; // キャッシュバスター
   const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error(`i18n load failed: ${lang}`);
+  if (!res.ok) throw new Error('i18n load failed: ' + url);
   return res.json();
 }
 
-// ====== 辞書キャッシュ（メモリ） ======
+// 現在言語の辞書をメモ化
 let dictCache = {};
 async function getDict() {
   const lang = getLang();
-  if (!dictCache[lang]) dictCache[lang] = await loadDict(lang);
+  if (!dictCache[lang]) {
+    dictCache[lang] = await loadDict(lang);
+  }
   return dictCache[lang];
 }
 
-// ====== i18n 適用 ======
+// data-i18n / data-i18n-aria に適用
 async function applyI18n() {
-  try {
-    const d = await getDict();
-
-    // data-i18n="key" のテキスト置換
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const k = el.getAttribute('data-i18n');
-      if (d[k] != null) el.textContent = d[k];
-    });
-
-    // data-i18n-aria="key" の aria-label 置換（必要あれば）
-    document.querySelectorAll('[data-i18n-aria]').forEach(el => {
-      const k = el.getAttribute('data-i18n-aria');
-      if (d[k] != null) el.setAttribute('aria-label', d[k]);
-    });
-
-  } catch (e) {
-    console.warn(e);
-  }
+  const d = await getDict();
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (d[k] != null) el.textContent = d[k];
+  });
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const k = el.getAttribute('data-i18n-aria');
+    if (d[k] != null) el.setAttribute('aria-label', d[k]);
+  });
 }
 
-// ====== 設定（言語ラジオ） ======
+// 設定ページの言語ラジオ
 function bindSettings() {
   const radios = document.querySelectorAll('input[name="lang"]');
   if (!radios.length) return;
-
   const cur = getLang();
   radios.forEach(r => {
     if (r.value === cur) r.checked = true;
@@ -68,87 +56,61 @@ function bindSettings() {
   });
 }
 
-// ====== ガイド：音声ファイル切替 ======
+// ガイドの音声
 function pickAudioByLang(lang) {
-  // 置いてあるファイル名に合わせる（/audio/en.mp3 など）
-  const map = {
-    ja: 'ja.mp3',
-    en: 'en.mp3',
-    'zh-CN': 'zh.mp3',
-    'zh-TW': 'zh.mp3',
-    ko: 'ko.mp3'
-  };
-  return `${AUDIO_PATH}/${map[lang] || map.ja}`;
+  const map = { ja:'ja.mp3', en:'en.mp3', 'zh-CN':'zh.mp3', 'zh-TW':'zh.mp3', ko:'ko.mp3' };
+  return map[lang] || map.ja;
 }
-
-function bindGuideAudio() {
-  const btn   = document.getElementById('playBtn');
+async function applyAudio() {
+  const audioEl = document.getElementById('guideAudio');
+  const btn = document.getElementById('playBtn');
   const state = document.getElementById('playState');
-  const audio = document.getElementById('guideAudio');
-  if (!btn || !state || !audio) return;
+  if (!audioEl || !btn || !state) return;
 
-  const setIdle = async () => {
-    const d = await getDict();
-    btn.textContent   = d.play;
-    state.textContent = d.idle;
-  };
+  const lang = getLang();
+  const d = await getDict();
 
-  // 初期ソースと言語文言
-  const initAudio = async () => {
-    const lang = getLang();
-    audio.src = pickAudioByLang(lang) + `?v=${VERSION}`;
-    await setIdle();
-  };
+  audioEl.src = `${AUDIO_PATH}/${pickAudioByLang(lang)}?v=8`;
+  btn.textContent = d.play;
+  state.textContent = d.idle;
+}
+function bindGuideAudio() {
+  const audioEl = document.getElementById('guideAudio');
+  const btn = document.getElementById('playBtn');
+  const state = document.getElementById('playState');
+  if (!audioEl || !btn || !state) return;
 
   btn.onclick = async () => {
-    const d = await getDict();
     try {
-      if (audio.paused) {
-        await audio.play();
-        btn.textContent   = d.pause;
+      const d = await getDict();
+      if (audioEl.paused) {
+        await audioEl.play();
+        btn.textContent = d.pause;
         state.textContent = d.nowPlaying;
       } else {
-        audio.pause();
-        await setIdle();
+        audioEl.pause();
+        btn.textContent = d.play;
+        state.textContent = d.idle;
       }
     } catch (e) {
-      state.textContent = d.error || 'Error';
       console.warn(e);
+      const d = await getDict();
+      state.textContent = d.error || 'Error';
     }
   };
-
-  initAudio();
 }
 
-// 言語が他タブで変わったときも反映
-window.addEventListener('storage', (e) => {
-  if (e.key === 'lang') {
-    document.documentElement.setAttribute('lang', getLang());
-    applyI18n();
-    applyAudio();
-  }
-});
-
-function applyAudio() {
-  // ガイドページにだけ要素があるので、安全に再初期化
-  const audio = document.getElementById('guideAudio');
-  if (!audio) return;
-  // ソースと表示を更新
-  const lang = getLang();
-  audio.src = pickAudioByLang(lang) + `?v=${VERSION}`;
-  // ボタン・状態ラベルも更新
-  getDict().then(d => {
-    const btn = document.getElementById('playBtn');
-    const st  = document.getElementById('playState');
-    if (btn) btn.textContent = d.play;
-    if (st)  st.textContent  = d.idle;
-  });
-}
-
-// ====== 初期化 ======
-document.addEventListener('DOMContentLoaded', () => {
+// 初期化
+document.addEventListener('DOMContentLoaded', async () => {
   document.documentElement.setAttribute('lang', getLang());
+  await applyI18n();
   bindSettings();
   bindGuideAudio();
-  applyI18n();
 });
+
+// Service Worker 登録（任意：あれば）
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js?v=8'); // 相対 + バージョン
+  });
+}
