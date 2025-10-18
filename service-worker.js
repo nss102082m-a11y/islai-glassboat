@@ -1,72 +1,73 @@
-// service-worker.js  — 完成版
-const VERSION = 'v8';                         // ★ここだけ上げる
-const CACHE_NAME = `islai-${VERSION}`;
-const ORIGIN = self.location.origin;
-
-const ASSETS = [
-  './',
-  './index.html',
-  './guide.html',
-  './about.html',
-  './settings.html',
-  './style.css',
-  './app.js',
-  './splash-lottie.css',
-  './splash-lottie.js',
-  './ISLAI_logo_main.PNG',
-  './manifest.json',
-  './icon-192.png',
-  './icon-512.png',
-  './ja.mp3',
-  './en.mp3',
-  './zh.mp3',
+// service-worker.js  — v6 (network-first for HTML/JS/JSON)
+const VERSION = 'v6';
+const STATIC_CACHE = `islai-static-${VERSION}`;
+const IMMUTABLE = [
+  '/style.css',
+  '/ISLAI_logo_main.PNG',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/audio/ja.mp3',
+  '/audio/en.mp3',
+  '/audio/zh.mp3',
+  '/audio/ko.mp3',
 ];
 
-self.addEventListener('install', (evt) => {
-  evt.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)));
+self.addEventListener('install', (e) => {
+  e.waitUntil(
+    caches.open(STATIC_CACHE).then((c) => c.addAll(IMMUTABLE))
+  );
   self.skipWaiting();
 });
 
-self.addEventListener('activate', (evt) => {
-  evt.waitUntil(
+self.addEventListener('activate', (e) => {
+  e.waitUntil(
     caches.keys().then((keys) =>
-      Promise.all(keys.filter((k) => k.startsWith('islai-') && k !== CACHE_NAME).map((k) => caches.delete(k)))
+      Promise.all(
+        keys
+          .filter((k) => ![STATIC_CACHE].includes(k))
+          .map((k) => caches.delete(k))
+      )
     )
   );
   self.clients.claim();
 });
 
-self.addEventListener('message', (evt) => {
-  if (evt.data === 'SKIP_WAITING') self.skipWaiting();
-});
+// HTML / JS / JSON は network-first（=更新が即反映）
+self.addEventListener('fetch', (event) => {
+  const req = event.request;
+  const url = new URL(req.url);
+  const isHTML = req.destination === 'document' || req.headers.get('accept')?.includes('text/html');
+  const isJS   = req.destination === 'script' || url.pathname.endsWith('.js');
+  const isJSON = url.pathname.startsWith('/i18n/') || url.pathname.endsWith('.json');
 
-self.addEventListener('fetch', (evt) => {
-  const req = evt.request;
-  if (req.method !== 'GET') return;
-
-  if (req.headers.has('range')) {
-    evt.respondWith(fetch(req));
+  if (isHTML || isJS || isJSON) {
+    event.respondWith(networkFirst(req));
     return;
   }
 
-  evt.respondWith((async () => {
-    const cache = await caches.open(CACHE_NAME);
-    const cached = await cache.match(req, { ignoreSearch: true });
-    if (cached) return cached;
-
-    try {
-      const res = await fetch(req);
-      try {
-        const url = new URL(req.url);
-        if (url.origin === ORIGIN && res.ok) cache.put(req, res.clone());
-      } catch {}
-      return res;
-    } catch {
-      if (req.mode === 'navigate') {
-        const home = await cache.match('./index.html');
-        if (home) return home;
-      }
-      return caches.match('./index.html');
-    }
-  })());
+  // 画像・音声などは cache-first（=オフライン強い）
+  event.respondWith(cacheFirst(req));
 });
+
+async function networkFirst(req) {
+  try {
+    const fresh = await fetch(req, { cache: 'no-store' });
+    const cache = await caches.open(STATIC_CACHE);
+    cache.put(req, fresh.clone());
+    return fresh;
+  } catch (e) {
+    const cached = await caches.match(req);
+    if (cached) return cached;
+    // ルートへフォールバック
+    return caches.match('/index.html') || Response.error();
+  }
+}
+
+async function cacheFirst(req) {
+  const cached = await caches.match(req);
+  if (cached) return cached;
+  const fresh = await fetch(req);
+  const cache = await caches.open(STATIC_CACHE);
+  cache.put(req, fresh.clone());
+  return fresh;
+}
