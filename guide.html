@@ -16,14 +16,15 @@
 
   <main class="app-main" role="main">
     <section class="hero">
-      <small data-i18n="guideTitle">Guide</small>
       <h1 data-i18n="guideTitle">ガイド</h1>
       <p data-i18n="guideMsg">ここにコースや音声ガイドの入口を置く想定。</p>
 
-      <p style="margin-top:16px">
+      <p style="margin-top:12px">
         <button id="playBtn" class="btn" data-i18n="play">再生</button>
         <span id="playState" style="margin-left:12px" data-i18n="idle">停止中</span>
       </p>
+
+      <!-- 言語でsrcを切り替える -->
       <audio id="guideAudio" preload="none"></audio>
     </section>
   </main>
@@ -37,6 +38,6 @@
 
   <footer>© ISLAI / BLUE CORAL</footer>
 
-  <script src="app.js?v=8"></script>
+  <script src="app.js" defer></script>
 </body>
 </html>
