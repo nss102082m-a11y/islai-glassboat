@@ -1,5 +1,5 @@
 // service-worker.js — v8 (network-first for HTML/JS/JSON, relative paths)
-const VERSION = 'v8';
+const VERSION = 'v7';
 const STATIC_CACHE = `islai-static-${VERSION}`;
 const IMMUTABLE = [
   'style.css',
